@@ -92,6 +92,7 @@ Upon running the seeders, a default admin user will be created:
 Email: mubashir99955@gmail.com
 
 Password: securepassword
+
 use : default Otp :sdm23
 
 Use this account to log in and manage the application.
