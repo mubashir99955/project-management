@@ -50,7 +50,7 @@ class UserController extends Controller implements HasMiddleware
             'email' => 'required|email|unique:users,email',
             'password' => 'string|min:8',
             'country' => 'required|string|max:50',
-            'role_id' => 'required|integer|exists:roles,id'
+            'role_name' => 'required|string|exists:roles,name'
         ]);
 
         if ($validator->fails()) {
@@ -71,12 +71,11 @@ class UserController extends Controller implements HasMiddleware
         ]);
         // Assign role
         if ($user) {
-            $role = Role::where('id', $request->role_id)->where('guard_name', 'sanctum')->first();
+            $role = Role::where('name', $request->role_name)->where('guard_name', 'sanctum')->first();
             // dd($role);
             if ($role) {
                 $user->syncRoles([$role->name]);
             }
-            $user->role_id = $request->role_id;
             if ($request->hasFile('profile_photo')) {
                 $fileName = $user->id;
                 $this->mediaController->uploadMedia($request, $user, $request->file('profile_photo'), 'user_uplaods', $fileName, true);
@@ -128,8 +127,8 @@ class UserController extends Controller implements HasMiddleware
             'email' => 'required|email|exists:users,email',
             'country' => 'required|string|max:50',
             'phone_number' => 'string|max:15',
-            'role_id' => 'required|integer|exists:roles,id',
-            'account_status' => 'required|string|in:active,inactive,pending approval,blocked,deleted',
+            'role_name' => 'required|string|exists:roles,name',
+            'account_status' => 'required|string|in:active,inactive,blocked,deleted',
         ]);
 
         if ($validator->fails()) {
@@ -177,8 +176,8 @@ class UserController extends Controller implements HasMiddleware
 
         $user->update($data);
         // Update role
-        if ($request->role_id) {
-            $role = Role::where('id', $request->role_id)->where('guard_name', 'sanctum')->first();
+        if ($request->role_name) {
+            $role = Role::where('name', $request->role_name)->where('guard_name', 'sanctum')->first();
             if ($role) {
                 $user->syncRoles([$role->name]);
             }
