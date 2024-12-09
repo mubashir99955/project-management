@@ -57,12 +57,10 @@ class RolesAndPermissionsSeeder extends Seeder
             'view tasks',
             'view single tasks',
             'update tasks',
-
         ]);
 
         // Assign specific permissions to Project Owner
         $projectOwner->givePermissionTo([
-            
             'create tasks',
             'view tasks',
             'view single tasks',
@@ -75,8 +73,22 @@ class RolesAndPermissionsSeeder extends Seeder
             'delete project',
             'view user',
             'view single user',
-
         ]);
+
+        // Create default Admin user
+        $adminUser = User::firstOrCreate([
+            'email' => 'mubashir99955@gmail.com',
+        ], [
+            'first_name' => 'Mubashar',
+            'last_name' => 'Javed',
+            'password' => Hash::make('securepassword'),
+            'country' => 'Pakistan',
+            'phone_number' => '03114595277',
+            'account_status' => 'active',
+        ]);
+
+        // Assign Admin role to the default user
+        $adminUser->assignRole($admin);
     }
 }
 
