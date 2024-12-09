@@ -39,6 +39,9 @@ Create necessary tables.
 
 Seed the database with default roles, permissions, and an admin user.
 
+php artisan db:seed --class=RolesAndPermissionsSeeder
+
+
 5. Generate Application Key
 
 php artisan key:generate
