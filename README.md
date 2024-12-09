@@ -12,6 +12,7 @@ MySQL or any compatible database
 
 Postman
 
+make .env file and copy the content from .ev.example
 Installation Guide
 
 1. Clone the Repository
