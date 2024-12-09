@@ -98,6 +98,8 @@ Password: securepassword
 
 use : default Otp :sdm23
 
+after loggedin as an admin you can make an account for Project Owner and User using the role name defined above
+
 Use this account to log in and manage the application.
 
 API Documentation
